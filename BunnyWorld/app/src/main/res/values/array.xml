@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gameSaveName">
+        <item>Select A Game</item>
+    </string-array>
+
+    <string-array name="pageName">
+        <item>page1</item>
+    </string-array>
+
+    <string-array name="shapeFigure">
+        <item>Select Shape</item>
+    </string-array>
+
+    <string-array name="triggerList">
+        <item>Trigger</item>
+    </string-array>
+
+    <string-array name="actionList">
+        <item>Action</item>
+    </string-array>
+
+    <string-array name="objectList">
+        <item>Object</item>
+    </string-array>
+
+    <string-array name="shapeTypeList">
+        <item>Shape</item>
+    </string-array>
+
+    <string-array name="fontList">
+        <item>sans-serif-</item>
+        <item>sans-serif-light</item>
+        <item>sans-serif-black</item>
+        <item>serif</item>
+        <item>monospace</item>
+        <item>casual</item>
+        <item>cursive</item>
+    </string-array>
+
+</resources>

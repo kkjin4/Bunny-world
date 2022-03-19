@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditGameActivity">
+
+    // all the buttons in this layout can be further replaced with img button 更好看
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        // display page and possessions part
+        // display part occupies 2/3 screen (in width)
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+            // unable to edit part
+            // occupies 1/3*1/2 screen (in height)
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:background="#000000"/>
+
+            // occupies 2/3*2/3 screen (in height)
+            <edu.stanford.cs108.bunnyworld.PageView
+                android:id="@+id/editPageView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8"/>
+
+            // separate page and possessions
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#000000"/>
+
+            // occupies 2/3*1/3 screen (in height)
+            <edu.stanford.cs108.bunnyworld.PossessionsView
+                android:id="@+id/editPossessionsView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"/>
+
+            // unable to edit part
+            // occupies 1/3*1/2 screen (in height)
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:background="#000000"/>
+
+        </LinearLayout>
+
+        // separate display and edit button
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="#000000"/>
+
+        // edit button part 1/3 screen (in width)
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_weight="1">-->
+
+        <!--            <ScrollView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent">-->
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            // display name of game saving and change it
+            <LinearLayout
+                android:id="@+id/gameSaveName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GameName:"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"/>
+
+                <EditText
+                    android:id="@+id/gameNameInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"/>
+
+                <Button
+                    android:id="@+id/gameNameChangeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onGameNameChange"
+                    android:text="√" />
+            </LinearLayout>
+
+            // page name list, create page button, delete page button
+            <LinearLayout
+                android:id="@+id/pageListAddDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gameSaveName"
+                android:orientation="horizontal">
+
+                // spinner to show page name
+                // occupies 2/3
+                // 周围可以加个框
+                <Spinner
+                    android:id="@+id/pageNameSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+
+                    android:entries="@array/pageName" />
+
+                // add new page, page default name is page1, page2, page3...
+                // occupies 1/6
+                <Button
+                    android:id="@+id/addPageButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:onClick="onAddPage"/>
+
+
+                // delete new page
+                // occupies 1/6
+                <Button
+                    android:id="@+id/deletePageButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toLeftOf="@+id/addPageButton"
+
+                    android:layout_weight="1"
+                    android:onClick="onDeletePage"
+
+                    android:text="-" />
+
+            </LinearLayout>
+
+            // current page name and change page name
+            <LinearLayout
+                android:id="@+id/pageNameChange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pageListAddDelete"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PageName:" />
+
+                // input the page name we want
+                // default show the current page name (can be a non-default name)
+                <EditText
+                    android:id="@+id/pageNameInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="page1"/>
+
+                // confirm the name change, change the name in page list
+                <Button
+                    android:id="@+id/pageNameChangeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onPageNameChange"
+
+                    android:text="√" />
+
+            </LinearLayout>
+
+            // set current page as the start page
+            <Button
+                android:id="@+id/setStartButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pageNameChange"
+
+                android:onClick="onSetStart"
+
+                android:text="SET START" />
+
+            // shape name list, create shape button, delete shape button
+            <LinearLayout
+                android:id="@+id/shapeListAddDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/setStartButton"
+                android:orientation="horizontal">
+
+                // spinner to show shape type and shape figure
+                // occupies 2/3
+                // 周围可以加个框
+                <Spinner
+                    android:id="@+id/shapeFigureSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+
+                    android:entries="@array/shapeFigure" />
+
+                // add new shape, shape default name is shape1, shape2, shape3...
+                // occupies 1/6
+                <Button
+                    android:id="@+id/addShapeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onAddShape"
+
+                    android:text="+" />
+
+                // delete new shape
+                // occupies 1/6
+                <Button
+                    android:id="@+id/deleteShapeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toLeftOf="@+id/addShapeButton"
+
+                    android:layout_weight="1"
+                    android:onClick="onDeleteShape"
+
+                    android:text="-" />
+
+            </LinearLayout>
+
+            // current selected shape name and change shape name
+            <LinearLayout
+                android:id="@+id/shapeNameChange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shapeListAddDelete"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ShapeName:" />
+
+                // input the shape name we want
+                // default show the current shape name (can be a non-default name)
+                <EditText
+                    android:id="@+id/shapeNameInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3" />
+
+                // confirm the name change, change the name in shape list
+                <Button
+                    android:id="@+id/shapeNameChangeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onShapeNameChange"
+
+                    android:text="√" />
+
+            </LinearLayout>
+
+            // set text shape
+            <Button
+                android:id="@+id/setTextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SET TEXT"
+                android:layout_below="@+id/shapeNameChange"
+                android:onClick="onSetText"/>
+
+
+            // show current selected shape position and size, resize button
+            <LinearLayout
+                android:id="@+id/shapePositionSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/setTextButton"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X:" />
+
+                <EditText
+                    android:id="@+id/xPositionInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Y:" />
+
+                <EditText
+                    android:id="@+id/yPositionInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Width:" />
+
+                <EditText
+                    android:id="@+id/widthInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Height:" />
+
+                <EditText
+                    android:id="@+id/heightInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Switch
+                    android:id="@+id/resizeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="resize"/>
+
+            </LinearLayout>
+
+            // set movable and visible status
+            <LinearLayout
+                android:id="@+id/movableVisible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/shapePositionSize">
+
+                <CheckBox
+                    android:id="@+id/movableCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Movable"
+                    android:layout_weight="1"
+                    android:onClick="onSetMovable"/>
+
+                <CheckBox
+                    android:id="@+id/visibleCheckBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:layout_weight="1"
+                    android:text="Visible"
+                    android:onClick="onSetVisible"/>
+            </LinearLayout>
+
+            // first select trigger, then select corresponding shape
+            <LinearLayout
+                android:id="@+id/triggerAction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/movableVisible"
+                android:orientation="horizontal">
+
+                // spinner of triggers
+                <Spinner
+                    android:id="@+id/triggerListSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:entries="@array/triggerList" />
+
+                // spinner of shapes
+                // only has content when trigger is onDrop
+                <Spinner
+                    android:id="@+id/shapeTypeListSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:entries="@array/shapeTypeList" />
+
+            </LinearLayout>
+
+            // then select object of action, additionally select corresponding shape name to
+            onDrop trigger
+            <LinearLayout
+                android:id="@+id/objectOnDropShape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/triggerAction"
+                android:orientation="horizontal">
+
+                // spinner of actions
+                <Spinner
+                    android:id="@+id/actionListSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:entries="@array/actionList" />
+
+                // spinner of objects
+                <Spinner
+                    android:id="@+id/objectListSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:entries="@array/objectList" />
+
+            </LinearLayout>
+
+            // confirm button to add script to the select shape
+            <Button
+                android:id="@+id/addScriptButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/objectOnDropShape"
+
+                android:onClick="onAddScript"
+
+                android:text="ADD SCRIPT" />
+
+            <Button
+                android:id="@+id/saveGameButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+
+                android:onClick="onSaveGame"
+
+                android:text="SAVE GAME" />
+
+        </RelativeLayout>
+        <!--            </ScrollView>-->
+        <!--        </RelativeLayout>-->
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
